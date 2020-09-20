@@ -32,7 +32,6 @@ jobs:
             return response.data
         
       - run: |
-          echo '${{ steps.get_release.outputs.result }}'
           echo '${{ steps.get_release.outputs.result.id }}'
           echo '${{ steps.get_release.outputs.result.assets.length }}'
           echo '${{ steps.get_release.outputs.result.name }}'
