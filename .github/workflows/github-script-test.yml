@@ -42,4 +42,4 @@ jobs:
             console.log(uploadUrl)
 
       - run: |
-          echo "${{ steps.get_release.outputs.result.upload_url }}"
+          echo "${{ fromJSON(steps.get_release.outputs.result).upload_url }}"
