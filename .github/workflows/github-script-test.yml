@@ -34,5 +34,9 @@ jobs:
       - uses: actions/github-script@v3
         with:
           script: |
+            const id = ${{ steps.get_release.outputs.result.id }}
+            const uploadUrl = ${{ steps.get_release.outputs.result.upload_url }}
             const output = ${{ steps.get_release.outputs.result }}
-            console.log(JSON.stringify(output)
+
+      - run: |
+          echo "${{ steps.get_release.outputs.result.upload_url }}"
