@@ -31,7 +31,8 @@ jobs:
             
             return response.data
         
-      - run: |
-          echo '${{ steps.get_release.outputs.result.id }}'
-          echo '${{ steps.get_release.outputs.result.assets.length }}'
-          echo '${{ steps.get_release.outputs.result.name }}'
+      - uses: actions/github-script@v3
+        with:
+          script: |
+            const output = ${{ steps.get_release.outputs.result }}
+            console.log(JSON.stringify(output)
