@@ -34,7 +34,7 @@ jobs:
       - uses: actions/github-script@v3
         with:
           script: |
-            const release = JSON.parse(${{ steps.get_release.outputs.result }})
+            const release = ${{ steps.get_release.outputs.result }}
             const id = release.id
             const uploadUrl = release.upload_url
 
