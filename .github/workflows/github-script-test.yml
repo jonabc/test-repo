@@ -42,4 +42,6 @@ jobs:
             console.log(uploadUrl)
 
       - run: |
-          echo "${{ fromJSON(steps.get_release.outputs.result).upload_url }}"
+          echo "$UPLOAD_URL"
+        env:
+          UPLOAD_URL: ${{ fromJSON(steps.get_release.outputs.result).upload_url }}
