@@ -37,6 +37,9 @@ jobs:
             const release = ${{ steps.get_release.outputs.result }}
             const id = release.id
             const uploadUrl = release.upload_url
+            
+            console.log(id)
+            console.log(uploadUrl)
 
       - run: |
           echo "${{ steps.get_release.outputs.result.upload_url }}"
