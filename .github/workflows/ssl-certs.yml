@@ -1,0 +1,13 @@
+name: Test ssl certs
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        sudo apt-get update && sudo apt-get install -y --no-install-recommends ca-certificates
+        sudo ls /etc/ssl/certs
+        sudo dpkg-query -l
