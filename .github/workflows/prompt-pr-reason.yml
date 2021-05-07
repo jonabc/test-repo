@@ -11,9 +11,10 @@ jobs:
     steps:
     - uses: actions/github-script@v4
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
           // ignore PRs that were not merged
+          console.log(github.event);
           if (!github.event.pull_request.merged) {
             return;
           }
