@@ -36,7 +36,7 @@ jobs:
             // the amount of time needed before notifying the user that the PR
             // has been open long enough
             if (timeOpenInSeconds < notifyTimeInSeconds) {
-              core.info(`skipping ${pullRequest.number}:${pullRequest.title}:  open for ${timeOpenInSeconds} seconds, threshold at ${notifyTimeInSeconds}` seconds);
+              core.info(`skipping #${pullRequest.number} ${pullRequest.title}:  open for ${timeOpenInSeconds} seconds, threshold at ${notifyTimeInSeconds} seconds`);
               continue;
             }
 
@@ -49,14 +49,14 @@ jobs:
 
             // if any of the PR comments include the known tag, a notification has already been sent
             if (comments.some(c => c.body.includes(notificationTag))) {
-              core.info(`skipping ${pullRequest.number}:${pullRequest.title}:  notification already sent`);
+              core.info(`skipping #${pullRequest.number} ${pullRequest.title}:  notification already sent`);
               continue;
             }
 
-            core.info(`notifying ${pullRequest.number}:${pullRequest.title}`);
+            core.info(`notifying #${pullRequest.number} ${pullRequest.title}`);
             // notify the PR author that the PR has been open long enough
             // include the notification tag so that this PR won't be commented on again
-            const comment = `${notificationTag}\n:wave: @${pullRequest.user.login}, this PR has been [open long enough](https://github.com/github/insights/blob/master/docs/how-we-work/authoring-issues-and-prs.md#pull-requests-should-be-open-for-a-minimum-of-24-hours).  Thanks for waiting :bow:!`;
+            const comment = `${notificationTag}\n:wave: @${pullRequest.user.login}, this PR has been [open long enough](https://github.com/github/insights/blob/master/docs/how-we-work/authoring-issues-and-prs.md#pull-requests-should-be-open-for-a-minimum-of-24-hours).  Thanks for waiting! :bow:`;
 
             await github.issues.createComment({
               issue_number: pullRequest.number,
