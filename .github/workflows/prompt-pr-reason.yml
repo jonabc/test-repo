@@ -33,7 +33,7 @@ jobs:
 
           // leave a comment on the PR asking for a reason why the PR was merged
           // before the minimum time elapsed
-          const comment = `:wave: @${pullRequest.merged_by}, this PR was merged faster than [expected](https://github.com/github/insights/blob/master/docs/how-we-work/authoring-issues-and-prs.md#pull-requests-should-be-open-for-a-minimum-of-24-hours)! If you haven't already, please leave a comment on this PR with any reasons why the PR was merged quickly so the team is aware.  Thanks :bow:!`;
+          const comment = `:wave: @${pullRequest.merged_by.login}, this PR was merged faster than [expected](https://github.com/github/insights/blob/master/docs/how-we-work/authoring-issues-and-prs.md#pull-requests-should-be-open-for-a-minimum-of-24-hours)! If you haven't already, please leave a comment on this PR with any reasons why the PR was merged quickly so the team is aware.  Thanks :bow:!`;
           await github.issues.createComment({
             issue_number: pullRequest.number,
             owner: context.repo.owner,
