@@ -11,9 +11,6 @@ jobs:
 
     steps:
     - uses: actions/github-script@v4
-      env:
-        # 1 day in seconds (60 seconds * 60 minutes * 24 hours)
-        NOTIFY_TIME_IN_SECONDS: ${{ 1 }}
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         script: |
@@ -21,6 +18,7 @@ jobs:
           // this is done to ensure we only send the notification a single time.
           // the tag won't be rendered, but can still be found by this automation
           const notificationTag = '<!-- notify minimum time open -->';
+          const notifyTimeInSeconds = 1;
 
           const openPullRequests = await github.pulls.list({
             owner: context.repo.owner,
@@ -36,7 +34,7 @@ jobs:
             // ignore if the time that the PR has been open is less than
             // the amount of time needed before notifying the user that the PR
             // has been open long enough
-            if (timeOpenInSeconds < process.env.NOTIFY_TIME_IN_SECONDS) {
+            if (timeOpenInSeconds < notifyTimeInSeconds) {
               return;
             }
 
