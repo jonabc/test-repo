@@ -10,9 +10,6 @@ jobs:
 
     steps:
     - uses: actions/github-script@v4
-      env:
-        # 1 day in seconds (60 seconds * 60 minutes * 24 hours)
-        MINIMUM_TIME_IN_SECONDS: ${{ 60 * 60 * 24 }}
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         script: |
@@ -25,8 +22,10 @@ jobs:
           const mergedAt = new Date(github.event.pull_request.merged_at);
           const timeToMergeInSeconds = (mergedAt - createdAt) / 1000;
           
+          const minimumTimeInSeconds = 60 * 60 * 24; // 1 day
+          
           // ignore if the time to merge is greater than or equal to the minimum time
-          if (timeToMergeInSeconds >= process.env.MINIMUM_TIME_IN_SECONDS) {
+          if (timeToMergeInSeconds >= minimumTimeInSeconds) {
             return;
           }
 
