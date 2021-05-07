@@ -36,7 +36,7 @@ jobs:
             // the amount of time needed before notifying the user that the PR
             // has been open long enough
             if (timeOpenInSeconds < notifyTimeInSeconds) {
-              core.info(`skipping ${pullRequest.number}:${pullRequest.title}`.  open for: ${timeOpenInSeconds}, threshold: ${notifyTimeInSeconds}`);
+              core.info(`skipping ${pullRequest.number}:${pullRequest.title}:  open for ${timeOpenInSeconds} seconds, threshold at ${notifyTimeInSeconds}` seconds);
               continue;
             }
 
@@ -47,10 +47,9 @@ jobs:
               repo: context.repo.repo,
             });
 
-            // if none of the PR comments include the known tag, then this action hasn't yet
-            // notified the PR.  do that notification now
+            // if any of the PR comments include the known tag, a notification has already been sent
             if (comments.some(c => c.body.includes(notificationTag))) {
-              core.info(`skipping ${pullRequest.number}:${pullRequest.title}`.  notification already sent`);
+              core.info(`skipping ${pullRequest.number}:${pullRequest.title}:  notification already sent`);
               continue;
             }
 
