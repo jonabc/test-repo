@@ -1,0 +1,64 @@
+name: Notify PRs that have been open long enough
+
+on:
+  schedule:
+    # run every 5 minutes
+    - cron: '*/5 * * * *'
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/github-script@v4
+      env:
+        # 1 day in seconds (60 seconds * 60 minutes * 24 hours)
+        NOTIFY_TIME_IN_SECONDS: ${{ 1 }}
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          // the notificationTag is a known HTML comment to include when creating notifications.
+          // this is done to ensure we only send the notification a single time.
+          // the tag won't be rendered, but can still be found by this automation
+          const notificationTag = '<!-- notify minimum time open -->';
+
+          const openPullRequests = await github.pulls.list({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            state: 'open'
+          });
+
+          for (pullRequest of openPullRequests) {
+            const createdAt = new Date(pullRequest.created_at);
+            const now = new Date();
+            const timeOpenInSeconds = (now - createdAt) / 1000;
+            
+            // ignore if the time that the PR has been open is less than
+            // the amount of time needed before notifying the user that the PR
+            // has been open long enough
+            if (timeOpenInSeconds < process.env.NOTIFY_TIME_IN_SECONDS) {
+              return;
+            }
+
+            // check for existing notification, don't pester the author!
+            const comments = await github.issues.listComments({
+              issue_number: pullRequest.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+
+            // if none of the PR comments include the known tag, then this action hasn't yet
+            // notified the PR.  do that notification now
+            if (!comments.some(c => c.body.includes(notificationTag))) {
+              // notify the PR author that the PR has been open long enough
+              // include the notification tag so that this PR won't be commented on again
+              const comment = `${notificationTag}:wave: @${pullRequest.user.login}, this PR has been [open long enough](https://github.com/github/insights/blob/master/docs/how-we-work/authoring-issues-and-prs.md#pull-requests-should-be-open-for-a-minimum-of-24-hours).  Thanks for waiting :bow:!`;
+
+              await github.issues.createComment({
+                issue_number: pullRequest.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: comment
+              });
+            }
+          }
