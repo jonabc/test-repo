@@ -52,7 +52,7 @@ jobs:
             if (!comments.some(c => c.body.includes(notificationTag))) {
               // notify the PR author that the PR has been open long enough
               // include the notification tag so that this PR won't be commented on again
-              const comment = `${notificationTag}:wave: @${pullRequest.user.login}, this PR has been [open long enough](https://github.com/github/insights/blob/master/docs/how-we-work/authoring-issues-and-prs.md#pull-requests-should-be-open-for-a-minimum-of-24-hours).  Thanks for waiting :bow:!`;
+              const comment = `${notificationTag}\n:wave: @${pullRequest.user.login}, this PR has been [open long enough](https://github.com/github/insights/blob/master/docs/how-we-work/authoring-issues-and-prs.md#pull-requests-should-be-open-for-a-minimum-of-24-hours).  Thanks for waiting! :bow:`;
 
               await github.issues.createComment({
                 issue_number: pullRequest.number,
