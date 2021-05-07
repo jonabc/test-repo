@@ -21,7 +21,7 @@ jobs:
           const notificationTag = '<!-- notify minimum time open -->';
           const notifyTimeInSeconds = 1;
 
-          const openPullRequests = await github.pulls.list({
+          const { data: openPullRequests } = await github.pulls.list({
             owner: context.repo.owner,
             repo: context.repo.repo,
             state: 'open'
@@ -41,7 +41,7 @@ jobs:
             }
 
             // check for existing notification, don't pester the author!
-            const comments = await github.issues.listComments({
+            const { data: comments } = await github.issues.listComments({
               issue_number: pullRequest.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
