@@ -1,3 +1,3 @@
 # test-repo
 
-foo bar testing actions
+foo bar testing
