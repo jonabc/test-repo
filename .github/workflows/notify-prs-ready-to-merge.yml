@@ -26,6 +26,7 @@ jobs:
             repo: context.repo.repo,
             state: 'open'
           });
+          console.log(openPullRequests);
 
           for (pullRequest of openPullRequests) {
             const createdAt = new Date(pullRequest.created_at);
