@@ -19,7 +19,7 @@ jobs:
           // this is done to ensure we only send the notification a single time.
           // the tag won't be rendered, but can still be found by this automation
           const notificationTag = '<!-- notify minimum time open -->';
-          const notifyTimeInSeconds = 60 * 60 * 24;  // 1 day in seconds
+          const notifyTimeInSeconds = 1;  // 1 day in seconds
 
           const { data: openPullRequests } = await github.pulls.list({
             owner: context.repo.owner,
