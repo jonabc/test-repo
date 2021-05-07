@@ -4,7 +4,6 @@ on:
   schedule:
     # run every 5 minutes
     - cron: '*/5 * * * *'
-  workflow_dispatch:
 
 jobs:
   run:
@@ -19,14 +18,13 @@ jobs:
           // this is done to ensure we only send the notification a single time.
           // the tag won't be rendered, but can still be found by this automation
           const notificationTag = '<!-- notify minimum time open -->';
-          const notifyTimeInSeconds = 1;
+          const notifyTimeInSeconds = 60 * 60 * 24;  // 1 day in seconds
 
           const { data: openPullRequests } = await github.pulls.list({
             owner: context.repo.owner,
             repo: context.repo.repo,
             state: 'open'
           });
-          console.log(openPullRequests);
 
           for (pullRequest of openPullRequests) {
             const createdAt = new Date(pullRequest.created_at);
@@ -37,7 +35,8 @@ jobs:
             // the amount of time needed before notifying the user that the PR
             // has been open long enough
             if (timeOpenInSeconds < notifyTimeInSeconds) {
-              return;
+              core.info(`skipping ${pullRequest.number}:${pullRequest.title}`.  open for: ${timeOpenInSeconds}, threshold: ${notifyTimeInSeconds}`);
+              continue;
             }
 
             // check for existing notification, don't pester the author!
@@ -49,16 +48,20 @@ jobs:
 
             // if none of the PR comments include the known tag, then this action hasn't yet
             // notified the PR.  do that notification now
-            if (!comments.some(c => c.body.includes(notificationTag))) {
-              // notify the PR author that the PR has been open long enough
-              // include the notification tag so that this PR won't be commented on again
-              const comment = `${notificationTag}\n:wave: @${pullRequest.user.login}, this PR has been [open long enough](https://github.com/github/insights/blob/master/docs/how-we-work/authoring-issues-and-prs.md#pull-requests-should-be-open-for-a-minimum-of-24-hours).  Thanks for waiting! :bow:`;
-
-              await github.issues.createComment({
-                issue_number: pullRequest.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: comment
-              });
+            if (comments.some(c => c.body.includes(notificationTag))) {
+              core.info(`skipping ${pullRequest.number}:${pullRequest.title}`.  notification already sent`);
+              continue;
             }
+
+            core.info(`notifying ${pullRequest.number}:${pullRequest.title}`);
+            // notify the PR author that the PR has been open long enough
+            // include the notification tag so that this PR won't be commented on again
+            const comment = `${notificationTag}\n:wave: @${pullRequest.user.login}, this PR has been [open long enough](https://github.com/github/insights/blob/master/docs/how-we-work/authoring-issues-and-prs.md#pull-requests-should-be-open-for-a-minimum-of-24-hours).  Thanks for waiting :bow:!`;
+
+            await github.issues.createComment({
+              issue_number: pullRequest.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
           }
