@@ -1,9 +1,6 @@
 name: Notify PRs that have been open long enough
 
 on:
-  schedule:
-    # run every 5 minutes
-    - cron: '*/5 * * * *'
   workflow_dispatch:
 
 jobs:
