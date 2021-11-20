@@ -48,7 +48,7 @@ jobs:
           version: 3.x
 
       # run licensed
-      - uses: jonabc/licensed-ci@v1
+      - uses: jonabc/licensed-ci@test-git-auth-in-url
         with:
           github_token: ${{ secrets.TEST_PAT }}
           # the "push" workflow updates license metadata files on the branch being examined.
