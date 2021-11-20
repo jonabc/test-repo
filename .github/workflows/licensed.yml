@@ -33,6 +33,7 @@ jobs:
           # at the head branch.  fetching all refs ensures that everything is available
           # for licensed-ci to run
           fetch-depth: 0
+          token: ${{ secrets.TEST_PAT }}
 
       # set up tooling
       - uses: actions/setup-go@v2
