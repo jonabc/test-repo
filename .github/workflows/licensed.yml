@@ -25,7 +25,7 @@ jobs:
       # to pull packages during go commands
       - name: Configure git private repo access
         env:
-          TOKEN: ${{ secrets.CONTAINER_BUILDER_TOKEN }}
+          TOKEN: ${{ secrets.TEST_PAT }}
         run: |
           git config --global --add url."https://${TOKEN}@github.com/".insteadOf "https://github.com/"
 
@@ -50,7 +50,7 @@ jobs:
       # run licensed
       - uses: jonabc/licensed-ci@v1
         with:
-          github_token: ${{ secrets.CONTAINER_BUILDER_TOKEN }}
+          github_token: ${{ secrets.TEST_PAT }}
           # the "push" workflow updates license metadata files on the branch being examined.
           # e.g. when the action is run on main, changes are pushed to main
 
