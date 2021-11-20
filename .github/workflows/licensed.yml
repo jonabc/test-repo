@@ -7,10 +7,6 @@ on:
       - main
   # run on all pull request events
   pull_request:
-    types:
-      - opened
-      - reopened
-      - synchronize
   # run on demand
   workflow_dispatch:
 
