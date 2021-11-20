@@ -57,6 +57,7 @@ jobs:
           workflow: push
           user_name: jonabc
           user_email: jonabc@github.com
+          commit_message: update license files
         env:
           GOPRIVATE: "*github.com/github/*"
           GOPROXY: "direct"
