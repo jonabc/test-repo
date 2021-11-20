@@ -1,0 +1,52 @@
+sources:
+  go: true
+
+allowed:
+  - apache-2.0
+  - bsd-2-clause
+  - bsd-3-clause
+  - isc
+  - mit
+  - cc0-1.0
+  - unlicense
+  - 0bsd
+
+ignored:
+  go:
+    # GitHub-owned packages:
+    - github.com/github/exception-filters/**/*
+    - github.com/github/go-config
+    - github.com/github/go-config/**/*
+    - github.com/github/go-dbase
+    - github.com/github/go-dbmigrator
+    - github.com/github/go-dbmigrator/**/*
+    - github.com/github/go-exceptions
+    - github.com/github/go-exceptions/**/*
+    - github.com/github/go-http/**/*
+    - github.com/github/go-http-middleware/**/*
+    - github.com/github/go-twirp/**/*
+    - github.com/github/go-kvp
+    - github.com/github/go-log
+    - github.com/github/go-reqmeta
+    - github.com/github/go-stats
+    - github.com/github/go-trace
+
+reviewed:
+  go:
+    # mpl-2.0 reviewed
+    - github.com/go-sql-driver/mysql
+    - github.com/hashicorp/errwrap
+    - github.com/hashicorp/go-multierror
+
+    # google bsd license + patents
+    - golang.org/x/net/**/*
+    - golang.org/x/sys/**/*
+    - google.golang.org/protobuf/**/*
+
+    # mit + bsd
+    - github.com/friendsofgo/errors
+
+    # multiple bsd-3-clause licenses in a single file
+    - github.com/shirou/gopsutil/v3/**/*
+
+source_path: cmd/*
