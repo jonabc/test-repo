@@ -24,7 +24,6 @@ jobs:
           TOKEN: ${{ secrets.TEST_PAT }}
         run: |
           git config --global --add url."https://${TOKEN}@github.com/".insteadOf "https://github.com/"
-          git config --add http.https://github.com/.extraheader "foo: bar"
 
       # checkout the repo
       - uses: actions/checkout@v2
@@ -43,6 +42,11 @@ jobs:
       - uses: jonabc/setup-licensed@v1
         with:
           version: 3.x
+
+      - run: |
+          git config --add http.https://github.com/.extraheader "foo: bar"
+          git config --add http.extraheader "Authorization: basic 123"
+          git config --add http.extraheader "foo: bar"
 
       # run licensed
       - uses: jonabc/licensed-ci@test-git-auth-in-url
