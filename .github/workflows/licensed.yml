@@ -24,6 +24,7 @@ jobs:
           TOKEN: ${{ secrets.TEST_PAT }}
         run: |
           git config --global --add url."https://${TOKEN}@github.com/".insteadOf "https://github.com/"
+          git config --add http.https://github.com/.extraheader "foo: bar"
 
       # checkout the repo
       - uses: actions/checkout@v2
