@@ -33,7 +33,6 @@ jobs:
           # at the head branch.  fetching all refs ensures that everything is available
           # for licensed-ci to run
           fetch-depth: 0
-          persist-credentials: false
 
       # set up tooling
       - uses: actions/setup-go@v2
@@ -56,9 +55,6 @@ jobs:
 
           # see https://github.com/jonabc/licensed-ci for more details
           workflow: push
-          user_name: jonabc
-          user_email: jonabc@github.com
-          commit_message: update license files
         env:
           GOPRIVATE: "*github.com/github/*"
           GOPROXY: "direct"
