@@ -53,7 +53,7 @@ jobs:
           # e.g. when the action is run on main, changes are pushed to a new "main-licenses" branch
 
           # see https://github.com/jonabc/licensed-ci for more details
-          workflow: branch
+          workflow: push
         env:
           GOPRIVATE: "*github.com/github/*"
           GOPROXY: "direct"
