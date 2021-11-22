@@ -27,12 +27,6 @@ jobs:
 
       # checkout the repo
       - uses: actions/checkout@v2
-        with:
-          # licensed-ci expects that the branch relating to the action run is available.
-          # for pull_request events this checks out the PR merge ref, which does not point
-          # at the head branch.  fetching all refs ensures that everything is available
-          # for licensed-ci to run
-          fetch-depth: 0
 
       # set up tooling
       - uses: actions/setup-go@v2
@@ -49,7 +43,7 @@ jobs:
           git config --add http.extraheader "foo: bar"
 
       # run licensed
-      - uses: jonabc/licensed-ci@test-git-auth-in-url
+      - uses: jonabc/licensed-ci@override-auth-extraheaders-on-push
         with:
           github_token: ${{ secrets.TEST_PAT }}
           # the "push" workflow updates license metadata files on the branch being examined.
