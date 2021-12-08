@@ -39,7 +39,7 @@ jobs:
           git config --add http.extraheader "foo: bar"
 
       # run licensed
-      - uses: jonabc/licensed-ci@v1
+      - uses: jonabc/licensed-ci@checkout-strategy-for-push
         with:
           github_token: ${{ secrets.TEST_PAT }}
         env:
