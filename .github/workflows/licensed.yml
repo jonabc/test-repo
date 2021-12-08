@@ -1,10 +1,6 @@
-name: Verify cached license metadata
+name: Verify cached license metadata for PR
 
 on:
-  # run on pushes to the default branch
-  push:
-    branches:
-      - main
   # run on all pull request events
   pull_request:
   # run on demand
@@ -46,14 +42,6 @@ jobs:
       - uses: jonabc/licensed-ci@override-auth-extraheaders-on-push
         with:
           github_token: ${{ secrets.TEST_PAT }}
-          # the "push" workflow updates license metadata files on the branch being examined.
-          # e.g. when the action is run on main, changes are pushed to main
-
-          # the "branch" workflow creates a new branch for license file updates.
-          # e.g. when the action is run on main, changes are pushed to a new "main-licenses" branch
-
-          # see https://github.com/jonabc/licensed-ci for more details
-          workflow: push
         env:
           GOPRIVATE: "*github.com/github/*"
           GOPROXY: "direct"
