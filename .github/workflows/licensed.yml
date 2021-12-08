@@ -42,6 +42,7 @@ jobs:
       - uses: jonabc/licensed-ci@checkout-strategy-for-push
         with:
           github_token: ${{ secrets.TEST_PAT }}
+          workflow: branch
         env:
           GOPRIVATE: "*github.com/github/*"
           GOPROXY: "direct"
