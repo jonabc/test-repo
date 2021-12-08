@@ -32,16 +32,11 @@ jobs:
         with:
           version: 3.x
 
-      - run: |
-          git config --add http.https://github.com/.extraheader "foo: bar"
-          git config --add http.extraheader "Authorization: basic 123"
-          git config --add http.extraheader "foo: bar"
-
       # run licensed
       - uses: jonabc/licensed-ci@checkout-strategy-for-push
         with:
           github_token: ${{ secrets.TEST_PAT }}
-          workflow: branch
+          workflow: push
         env:
           GOPRIVATE: "*github.com/github/*"
           GOPROXY: "direct"
