@@ -2,7 +2,7 @@ name: Verify cached license metadata for PR
 
 on:
   # run on all pull request events
-  push:
+  pull_request:
   # run on demand
   workflow_dispatch:
 
