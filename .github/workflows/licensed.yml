@@ -1,0 +1,19 @@
+name: licensed
+
+on:
+  # run on demand
+  workflow_dispatch: 
+  # run on a schedule
+  schedule: 
+    - cron: '*/5 * * * *' # e.g. every 5 minutes
+    
+jobs:
+  licensed:
+    steps:
+      - uses: actions/checkout@v2
+      - uses: jonabc/setup-licensed@v1
+        with:
+          version: 3.x
+      - uses: jonabc/licensed-ci@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
