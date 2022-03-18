@@ -21,6 +21,7 @@ jobs:
           script: |
             console.log(context)
             console.log(process.env)
+            console.log(context.repo)
           
       - uses: jonabc/licensed-ci@v1
         with:
