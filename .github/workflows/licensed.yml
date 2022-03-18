@@ -19,7 +19,8 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            console.log(context.payload)
+            console.log(context)
+            console.log(process.env)
           
       - uses: jonabc/licensed-ci@v1
         with:
