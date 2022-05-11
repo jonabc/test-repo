@@ -19,8 +19,6 @@ jobs:
       # Runs a single command using the runners shell
       - uses: actions/github-script@v6
         with:
-          foo:
-            - bar
-            - baz
+          foo: bar, baz
           script: |
             console.log(core.getInput('foo'))
