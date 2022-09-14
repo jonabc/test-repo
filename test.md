@@ -1,11 +1,11 @@
 references a few things
-- [ ] an issue with review lab ref https://single-async-html-path.review-lab.github.com/jonabc/test-repo/issues/11
+- [ ] an issue with review lab ref https://graduate-pipeline-blob-markup-experiment.review-lab.github.com/jonabc/test-repo/issues/11
 - [ ] a closed issue https://github.com/jonabc/test-repo/issues/1
 - [ ] a pull request  https://github.com/jonabc/test-repo/pull/17
 - [ ] a discussion https://github.com/jonabc/test-repo/discussions/36
-- [ ] a discussion with review lab ref https://single-async-html-path.review-lab.github.com/jonabc/test-repo/discussions/36
+- [ ] a discussion with review lab ref https://graduate-pipeline-blob-markup-experiment.review-lab.github.com/jonabc/test-repo/discussions/36
 - [ ] an alert https://github.com/github/github/security/code-scanning/1062
-- [ ] an alert with review lab ref https://single-async-html-path.review-lab.github.com/github/github/security/code-scanning/1062
+- [ ] an alert with review lab ref https://graduate-pipeline-blob-markup-experiment.review-lab.github.com/github/github/security/code-scanning/1062
 - [ ] non reference
 
 ### jonab+c readable repo
