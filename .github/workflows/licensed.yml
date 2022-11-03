@@ -21,7 +21,7 @@ jobs:
           git config --global --add url."https://${TOKEN}@github.com/".insteadOf "https://github.com/"
 
       # checkout the repo
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       # set up tooling
       - uses: actions/setup-go@v2
