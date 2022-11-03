@@ -50,6 +50,6 @@ apps:
   - source_path: cmd/*
     sources:
       go: true
-  - source_path: npm
+  - source_path: .
     sources:
       npm: true
