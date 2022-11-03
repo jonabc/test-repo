@@ -1,6 +1,3 @@
-sources:
-  go: true
-
 allowed:
   - apache-2.0
   - bsd-2-clause
@@ -49,4 +46,10 @@ reviewed:
     # multiple bsd-3-clause licenses in a single file
     - github.com/shirou/gopsutil/v3/**/*
 
-source_path: cmd/*
+apps: 
+  - source_path: cmd/*
+    sources:
+      go: true
+  - source_path: npm
+    sources:
+      npm: true

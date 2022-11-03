@@ -14,19 +14,26 @@ jobs:
     steps:
       # make sure git can access private repos
       # to pull packages during go commands
-      - name: Configure git private repo access
-        env:
-          TOKEN: ${{ secrets.TEST_PAT }}
-        run: |
-          git config --global --add url."https://${TOKEN}@github.com/".insteadOf "https://github.com/"
+      # - name: Configure git private repo access
+      #   env:
+      #     TOKEN: ${{ secrets.TEST_PAT }}
+      #   run: |
+      #     git config --global --add url."https://${TOKEN}@github.com/".insteadOf "https://github.com/"
 
       # checkout the repo
       - uses: actions/checkout@v3
 
       # set up tooling
-      - uses: actions/setup-go@v2
+      # - uses: actions/setup-go@v2
+      #   with:
+      #     go-version: 1.16.x
+
+      - uses: actions/setup-node@v3
         with:
-          go-version: 1.16.x
+          node-version: 16
+          cache: npm
+
+      - run: cd npm && npm install --production --ignore-scripts
 
       - uses: jonabc/setup-licensed@v1
         with:
@@ -37,6 +44,6 @@ jobs:
         with:
           github_token: ${{ secrets.TEST_PAT }}
           workflow: push
-        env:
-          GOPRIVATE: "*github.com/github/*"
-          GOPROXY: "direct"
+        # env:
+        #   GOPRIVATE: "*github.com/github/*"
+        #   GOPROXY: "direct"
