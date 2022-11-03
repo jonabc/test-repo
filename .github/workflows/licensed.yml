@@ -33,7 +33,7 @@ jobs:
           version: 3.x
 
       # run licensed
-      - uses: jonabc/licensed-ci@main
+      - uses: jonabc/licensed-ci@v1
         with:
           github_token: ${{ secrets.TEST_PAT }}
           workflow: push
