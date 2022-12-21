@@ -1,0 +1,6 @@
+sources:
+  npm: true
+
+allowed:
+  - mit
+  - apache-2.0
