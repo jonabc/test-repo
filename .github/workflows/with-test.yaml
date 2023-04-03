@@ -26,4 +26,4 @@ jobs:
           foo: bar, baz
           script: |
             core.info("running on test branch")
-            core.info(${{inputs.foo}})
+            core.info("${{inputs.foo}}")
