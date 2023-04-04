@@ -22,7 +22,6 @@ jobs:
     steps:
       # Runs a single command using the runners shell
       - uses: actions/github-script@v6
-        if: ${{ (github.event.inputs.foo || 'foo') == 'foo' }}
         with:
           script: |
             core.info("running on test branch")
