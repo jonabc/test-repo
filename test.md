@@ -8,6 +8,8 @@ references a few things
 - [ ] an alert with review lab ref https://graduate-pipeline-blob-markup-experiment.review-lab.github.com/github/github/security/code-scanning/1062
 - [ ] non reference
 
+footnote ref[^1]
+
 ### jonab+c readable repo
 review lab ref: https://graduate-pipeline-blob-markup-experiment.review-lab.github.com/jonabc/test-repo/issues/11
 https://github.com/jonabc/test-repo/issues/11
@@ -25,3 +27,5 @@ review lab ref: https://graduate-pipeline-blob-markup-experiment.review-lab.gith
 https://github.com/github/github/security/code-scanning/1062
 
 foobar
+
+[^1]: my footnote content is awesome
