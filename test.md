@@ -28,4 +28,4 @@ https://github.com/github/github/security/code-scanning/1062
 
 foobar
 
-[^1]: my footnote content is awesome
+[^1]: my footnote content is <a href="https://github.com/jonabc">awesome</a>
