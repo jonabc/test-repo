@@ -28,4 +28,10 @@ https://github.com/github/github/security/code-scanning/1062
 
 foobar
 
+```mermaid
+graph LR;
+    Write --writes to--> Memory;
+    Memory --reads--> r1[Read] & r2[Read] & r3[Read];
+```
+
 [^1]: my footnote content is <a href="https://github.com/jonabc">awesome</a>
