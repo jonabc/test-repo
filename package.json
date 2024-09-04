@@ -1,0 +1,17 @@
+{
+  "name": "test-repo",
+  "version": "1.0.0",
+  "description": "foo bar testing again!",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
