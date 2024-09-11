@@ -23,6 +23,5 @@ jobs:
       # Runs a single command using the runners shell
       - uses: actions/github-script@v6
         with:
-          foo: bar, baz
           script: |
             core.info(${{inputs.foo}})
