@@ -1,0 +1,31 @@
+name: migrations-ok-to-merge
+
+on:
+  pull_request:
+    branches:
+    - main
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  check-for-unapplied-migrations:
+    runs-on: ubuntu-latest
+    steps:
+    - if: ${{ contains(github.event.pull_request.labels.*.name, 'migration:skeema:diff') }}
+      id: fc
+      uses: peter-evans/find-comment@3eae4d37986fb5a8592848f6a574fdf654e61f9e
+      with:
+        issue-number: ${{github.event.pull_request.number}}
+        comment-author: hubot
+        body-includes: 'Please go ahead and follow your standard deploy/merge flow.'
+    - id: check-fc-output
+      if: ${{ always() }}
+      run: |
+        # assert either
+        # - the step did not run is no step output (no migration detected),
+        # - hubot has commented that the migration is applied and the PR can now be merged
+        [ "${{steps.fc.conclusion}}" = "skipped" ] || [ "${{steps.fc.outputs.comment-id}}" != "0" ]
+      
