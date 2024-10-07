@@ -25,5 +25,5 @@ jobs:
         # assert either
         # - the step did not run is no step output (no migration detected),
         # - hubot has commented that the migration is applied and the PR can now be merged
-        [ "${{steps.fc.conclusion}}" = "skipped" ] || [ "${{steps.fc.outputs.comment-id}}" != "0" ]
+        [ "${{steps.fc.conclusion}}" = "skipped" ] || [ -Z "${{steps.fc.outputs.comment-id}}" ]
       
