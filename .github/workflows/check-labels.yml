@@ -16,7 +16,7 @@ jobs:
       id: fc
       uses: peter-evans/find-comment@3eae4d37986fb5a8592848f6a574fdf654e61f9e
       with:
-        issue-number: ${{github.event.*.number}}
+        issue-number: ${{github.event.pull_request && github.event.pull_request.number || github.event.issue.number}}
         comment-author: jonabc
         body-includes: 'Please go ahead and follow your standard deploy/merge flow.'
     - id: check-fc-output
