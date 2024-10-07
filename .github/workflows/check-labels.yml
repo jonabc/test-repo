@@ -4,16 +4,19 @@ on:
   pull_request:
     branches:
     - main
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+  issue_comment:
+    types: [created]
 
 jobs:
   check-for-unapplied-migrations:
     runs-on: ubuntu-latest
     steps:
-    - if: ${{ contains(github.event.pull_request.labels.*.name, 'migration:skeema:diff') }}
+    - if: ${{ contains(github.event.*.labels.*.name, 'migration:skeema:diff')}}
       id: fc
       uses: peter-evans/find-comment@3eae4d37986fb5a8592848f6a574fdf654e61f9e
       with:
-        issue-number: ${{github.event.pull_request.number}}
+        issue-number: ${{github.event.*.number}}
         comment-author: jonabc
         body-includes: 'Please go ahead and follow your standard deploy/merge flow.'
     - id: check-fc-output
